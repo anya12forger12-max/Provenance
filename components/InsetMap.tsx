@@ -5,7 +5,8 @@
 // calls onSelect(id) when a point is clicked. Dependency-free beyond maplibre-gl
 // (already used by the globe). NOT the 1379-line WorldMap — deliberately minimal.
 import { useEffect, useRef } from "react";
-import maplibregl, { type GeoJSONSource } from "maplibre-gl";
+import * as maplibregl from "maplibre-gl";
+import { type GeoJSONSource } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { pointsToFC, boundsOf, type InsetPoint } from "@/lib/map/inset";
 

@@ -6,7 +6,7 @@
 // via the browser. queryRenderedFeatures already restricts to the visible viewport
 // and returns [] if the layer is absent, so this is safe before layers load.
 
-import maplibregl from "maplibre-gl";
+import * as maplibregl from "maplibre-gl";
 
 export interface ThumbCandidate {
   id: string;

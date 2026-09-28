@@ -5,7 +5,7 @@
 // lib/icons/svg.ts into RGBA images and register them on the map via addImage.
 // DOM-dependent (canvas/Image) so this lives apart from the pure FC builders.
 
-import type maplibregl from "maplibre-gl";
+import type * as maplibregl from "maplibre-gl";
 import {
   ICON_SVG,
   cameraRegionColor,
