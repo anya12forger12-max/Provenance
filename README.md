@@ -123,3 +123,11 @@ The AGPL covers **this codebase only**. Every upstream feed keeps its own separa
 ### Third-party code
 
 None. No code was copied from any other project; `koala73/worldmonitor` was read for factual endpoint information only, which is not copyrightable.
+
+
+## Installation
+
+```bash
+./install.sh   # runs npm install
+npm run dev
+```
