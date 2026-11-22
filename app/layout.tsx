@@ -1,12 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { BRAND, siteUrl } from "@/lib/brand";
 import "./globals.css";
 
-// The OpenData Terminal's two typefaces, self-hosted by next/font (no runtime
-// request to Google, no render-blocking <link>, and a size-matched local fallback
-// generated per family so the swap does not reflow the grid).
+// The OpenData Terminal's two typefaces, vendored as woff2 under public/fonts and
+// self-hosted by next/font/local. Google Fonts is deliberately NOT contacted at
+// build time: the Docker builder cannot reliably reach fonts.googleapis.com, and a
+// failed font fetch used to break `npm run build` with an opaque next/font error.
+// The files carry the same size-matched local fallback so the swap does not reflow.
 //
 // Neither was loaded before this: `--tn-mono` merely NAMED "JetBrains Mono" third in
 // an OS-fallback list, so on Windows it resolved to Consolas and on macOS to SF Mono,
@@ -17,16 +19,16 @@ import "./globals.css";
 // another woff2 on the critical path. Mono: 400 body/rows, 500 emphasis, 700 labels
 // and numbers, 800 the SEL badge and mode pills. Sans: 400/500/600 for headline
 // titles only.
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "700", "800"],
+const jetbrainsMono = localFont({
+  src: "../public/fonts/JetBrainsMono-Variable.woff2",
+  weight: "100 800",
   variable: "--tn-font-mono",
   display: "swap",
 });
 
-const ibmPlexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+const ibmPlexSans = localFont({
+  src: "../public/fonts/IBMPlexSans-Variable.woff2",
+  weight: "100 700",
   variable: "--tn-font-sans",
   display: "swap",
 });

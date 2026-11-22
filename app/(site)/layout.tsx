@@ -1,4 +1,4 @@
-import { Archivo, IBM_Plex_Mono, Public_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "../provenance.css";
 
 // The landing page's three faces, all open source — which matters on a page whose
@@ -10,23 +10,28 @@ import "../provenance.css";
 // axis so the headlines can sit at ~118 without a fake horizontal scale.
 //
 // These live in the (site) group's layout, not the root, so the console at /app
-// never downloads them.
-const archivo = Archivo({
-  subsets: ["latin"],
-  axes: ["wdth"],
+// never downloads them. All five files are vendored under public/fonts so the
+// Docker build never depends on fonts.googleapis.com being reachable.
+const archivo = localFont({
+  src: "../../public/fonts/Archivo-Variable.woff2",
+  weight: "100 900",
+  declarations: [{ prop: "font-stretch", value: "62% 125%" }],
   variable: "--pv-font-display",
   display: "swap",
 });
 
-const publicSans = Public_Sans({
-  subsets: ["latin"],
+const publicSans = localFont({
+  src: "../../public/fonts/PublicSans-Variable.woff2",
+  weight: "100 900",
   variable: "--pv-font-body",
   display: "swap",
 });
 
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
+const plexMono = localFont({
+  src: [
+    { path: "../../public/fonts/IBMPlexMono-400.woff2", weight: "400", style: "normal" },
+    { path: "../../public/fonts/IBMPlexMono-500.woff2", weight: "500", style: "normal" },
+  ],
   variable: "--pv-font-mono",
   display: "swap",
 });
