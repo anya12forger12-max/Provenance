@@ -1,0 +1,17 @@
+node_modules
+.next
+.next-*
+.git
+.github
+.vercel
+.superpowers
+*.tsbuildinfo
+next-env.d.ts
+.env
+.env*.local
+npm-debug.log*
+playwright-report
+test-results
+Dockerfile
+docker-compose.yml
+DEPLOYMENT.md

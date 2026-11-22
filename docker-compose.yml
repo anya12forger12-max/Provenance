@@ -1,0 +1,31 @@
+services:
+  provenance:
+    image: ${IMAGE:-ghcr.io/011-sam-110/trafficnerd-v2:latest}
+    build:
+      context: .
+      args:
+        # Baked into the client bundle at build time. The value is read from
+        # .env by Compose interpolation (env_file does not feed build args).
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-}
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+    ports:
+      - "${PORT:-3000}:3000"
+    restart: unless-stopped
+    healthcheck:
+      # Cheap in-process check; no curl needed because Node 22 provides fetch.
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:' + (process.env.PORT || '3000') + '/api/status').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s

@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   // Allow an isolated build dir so a verification `next build` doesn't fight a
   // concurrently-running `next dev` over `.next` (defaults to `.next`).
   distDir: process.env.TN_DIST_DIR || ".next",
+  // Emit a self-contained server bundle under `<distDir>/standalone` for the
+  // production image. Keeps the build-time distDir override and satellite.js
+  // webpack shims below unchanged.
+  output: "standalone",
   webpack: (config, { isServer, webpack }) => {
     if (!isServer) {
       // satellite.js v7's barrel re-exports a WASM threading runtime
