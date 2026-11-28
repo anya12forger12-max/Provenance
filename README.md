@@ -66,3 +66,14 @@ This is public-data mapping, not a licence to surveil people. Respect each upstr
 - **Third-party code:** the upstream README states that no code was copied from other projects; `koala73/worldmonitor` was consulted only for factual endpoint information.
 
 Original design and implementation belong to 011-sam-110. This mirror preserves that attribution and makes no claim of original authorship.
+
+## Quick start — 1 or 2 commands
+
+```bash
+./setup.sh          # install dependencies
+./setup.sh run      # start the project (when a run target exists)
+```
+
+`setup.sh` detects this repository's build system and installs the right toolchain
+dependencies. Use `./setup.sh test` to run the available checks. If a project has no
+standard run target, the script prints the correct command from the sections above.
