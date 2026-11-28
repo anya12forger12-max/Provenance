@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCameraPage } from "@/lib/seo/registrySnapshot";
+import { jsonLd } from "@/lib/seo/jsonLd";
 import { isLiveStreamUrl } from "@/lib/proxy/hls-allowlist";
 import { CameraImage } from "@/components/CameraImage";
 import { CameraVideo } from "@/components/CameraVideo";
@@ -121,7 +122,7 @@ export default async function CameraPage({ params }: { params: Promise<{ id: str
     <main className="camera-detail">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbLd) }}
       />
 
       <nav className="tn-dir-crumbs" aria-label="Breadcrumb">
